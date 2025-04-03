@@ -20,10 +20,10 @@ import CheckAuth from "./components/common/check_auth"
 
 function App() {
 
-    const isAuthenticated=true;
+    const isAuthenticated=false;
     const user={
         name: 'AB',
-        role: 'admin'
+        role: null
     };
 
     return (

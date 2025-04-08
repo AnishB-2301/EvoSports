@@ -2,15 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const authRouter = require('./routes/auth/auth-routes')
 
-mongoose.connect()
+require('dotenv').config();
+
+
+mongoose.connect("mongodb+srv://anishb2301:tdRwRwX1SbNoUlTA@cluster0.7hcxugp.mongodb.net/")
+  .then(() => console.log("MongoDB connected"))
+  .catch((error) => console.log(error));
 
 const app = express()
 const PORT = process.env.PORT || 5000;
 
 app.use(
     cors({
-        origin : 'http://localhost:5173/',
+        origin : 'http://localhost:5173',
         methods : ['GET', 'POST', 'DELETE', 'PUT'],
         allowheaders : [
             'Content-Type',
@@ -25,5 +31,6 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use('/api/auth', authRouter);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
